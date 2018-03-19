@@ -1,7 +1,6 @@
 package Data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -37,8 +36,8 @@ public class DataGenerator {
 	 *            The largest list value possible to generate.
 	 * @return The generated list.
 	 */
-	public static List<Double> GenerateList(long seed, int minValue, int maxValue) {
-		List<Double> list = new ArrayList<Double>();
+	public static ArrayList<Double> GenerateList(int seed, int minValue, int maxValue) {
+		ArrayList<Double> list = new ArrayList<Double>();
 		Random random = new Random(seed);
 
 		int size = random.nextInt((maxListSize - minListSize) + 1) + minListSize;
