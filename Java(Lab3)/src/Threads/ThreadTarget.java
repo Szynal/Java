@@ -2,7 +2,7 @@ package Threads;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+import Data.Statistic;
 import static java.lang.Thread.sleep;
 
 public class ThreadTarget implements Runnable {
@@ -41,8 +41,8 @@ public class ThreadTarget implements Runnable {
 			int seed = random.nextInt(maxSeed - minSeed + 1) + minSeed;
 
 			System.out.println("Thread " + id + " seed " + seed);
-			System.out.println(
-					"Thread " + id + " seed " + seed + " average " + calcAverage(threadManager.GetList(seed, 50, 100)));
+			System.out.println("Thread " + id + " seed " + seed + " average "
+					+ Data.Statistic.Average(threadManager.GetList(seed, 50, 100)));
 
 			try {
 				//
@@ -57,13 +57,4 @@ public class ThreadTarget implements Runnable {
 		System.out.println("Thread " + id + " start working");
 	}
 
-	private double calcAverage(@SuppressWarnings("rawtypes") ArrayList list) {
-		double sum = 0d;
-
-		for (Object x : list) {
-			sum += (double) x;
-		}
-
-		return sum / list.size();
-	}
 }

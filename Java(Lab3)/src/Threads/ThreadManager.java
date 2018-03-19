@@ -65,6 +65,7 @@ public class ThreadManager {
 		// referenceQueue.
 	}
 
+	@SuppressWarnings("unchecked")
 	public ArrayList<ThreadTarget> GetList(int seed, int minValue, int maxValue) {
 
 		synchronized (hashMap) {

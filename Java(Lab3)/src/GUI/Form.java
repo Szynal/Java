@@ -1,13 +1,10 @@
 package GUI;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.awt.Frame;
 
 import javax.swing.SwingConstants;
 
@@ -16,27 +13,12 @@ import Threads.ThreadManager;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JSpinner;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
-import javax.swing.JList;
 import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.ScrollPane;
-import java.awt.TextArea;
-import java.awt.Scrollbar;
 import java.awt.Color;
 
 public class Form {
