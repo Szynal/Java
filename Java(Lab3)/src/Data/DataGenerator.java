@@ -14,11 +14,11 @@ public class DataGenerator {
 	/**
 	 * The smallest list size possible to generate. (10^6)
 	 */
-	private static int minListSize = 1000000;
+	private static int minListSize = 10000;
 	/**
 	 * The largest list size possible to generate (10^9)
 	 */
-	private static int maxListSize = 100000000;
+	private static int maxListSize = 1000000;
 
 	/**
 	 * <p>
