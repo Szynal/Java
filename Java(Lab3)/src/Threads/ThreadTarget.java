@@ -1,8 +1,7 @@
 package Threads;
 
-import java.util.ArrayList;
 import java.util.Random;
-import Data.Statistic;
+
 import static java.lang.Thread.sleep;
 
 public class ThreadTarget implements Runnable {
