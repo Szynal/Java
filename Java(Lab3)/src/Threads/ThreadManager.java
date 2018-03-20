@@ -71,7 +71,7 @@ public class ThreadManager {
 
 		synchronized (hashMap) {
 
-			Program.textArea.append("Requesting " + seed + "\n");
+			Program.textArea.append("Requesting... " + seed + "\n");
 
 			// If the specified key is not already associated with a value ...
 			hashMap.putIfAbsent(seed, new SoftReference<>(DataGenerator.GenerateList(seed), referenceQueue));

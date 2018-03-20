@@ -16,6 +16,7 @@ public class ThreadTarget implements Runnable {
 	private int maxTime = 10000;
 	private ThreadManager threadManager;
 	Program program;
+	Frame data;
 
 	/**
 	 * *
@@ -40,7 +41,7 @@ public class ThreadTarget implements Runnable {
 	 */
 	public void run() {
 		random = new Random();
-		Frame data = new Frame();
+		data = new Frame();
 
 		maxSeed = (Integer) data.MaxSeedValueSpinner.getValue();
 		minSeed = (Integer) data.MinSeedValueSpinner.getValue();
@@ -49,7 +50,7 @@ public class ThreadTarget implements Runnable {
 			int seed = random.nextInt(maxSeed - minSeed + 1) + minSeed;
 
 			Program.textArea.append("Thread " + id + " seed " + seed + "\n");
-			Program.textArea.append("Thread " + id + " seed " + seed + " average "
+			Program.textArea.append("Thread " + id + " seed " + seed + " average: "
 					+ Data.Statistic.Average(threadManager.GetList(seed)) + "\n");
 
 			try {
@@ -62,7 +63,8 @@ public class ThreadTarget implements Runnable {
 	}
 
 	public void StartTreadInfo(int id) {
-		Program.textArea.append("Thread " + id + " start working" + "\n");
+		Program.textArea.append("Thread " + id + " START" + "\n");
+
 	}
 
 }
