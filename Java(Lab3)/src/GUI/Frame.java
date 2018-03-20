@@ -68,6 +68,9 @@ public class Frame {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setAutoRequestFocus(false);
+		frame.setFont(new Font("Arial", Font.PLAIN, 18));
 		frame.setIconImage(Toolkit.getDefaultToolkit()
 				.getImage("C:\\Users\\Pawel Szynal\\Documents\\Java\\Java(Lab3)\\img\\pwr.png"));
 		frame.setTitle("Lab 3. S\u0142abe/mi\u0119kkie referencje i w\u0105tki");
@@ -81,99 +84,106 @@ public class Frame {
 
 		btnStart = new JButton("Start");
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnStart.setBounds(242, 240, 106, 40);
+		btnStart.setBounds(10, 334, 752, 40);
 		mainPanel.add(btnStart);
 
 		MinListSizeSpinner = new JSpinner();
+		MinListSizeSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MinListSizeSpinner
 				.setModel(new SpinnerNumberModel(new Long(10000), new Long(100), new Long(1000000), new Long(1)));
-		MinListSizeSpinner.setBounds(193, 39, 84, 23);
+		MinListSizeSpinner.setBounds(232, 54, 105, 30);
 		mainPanel.add(MinListSizeSpinner);
 
 		MaxListSizeSpinner = new JSpinner();
+		MaxListSizeSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MaxListSizeSpinner
 				.setModel(new SpinnerNumberModel(new Long(1000000), new Long(100), new Long(2000000), new Long(1)));
-		MaxListSizeSpinner.setBounds(193, 73, 84, 23);
+		MaxListSizeSpinner.setBounds(232, 97, 105, 30);
 		mainPanel.add(MaxListSizeSpinner);
 
 		lblNewLabel = new JLabel("Minimum size of the list:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(10, 39, 173, 23);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNewLabel.setBounds(10, 44, 225, 30);
 		mainPanel.add(lblNewLabel);
 
 		lblMaximumSizeOf = new JLabel("Maximum size of the list:");
-		lblMaximumSizeOf.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMaximumSizeOf.setBounds(10, 73, 173, 23);
+		lblMaximumSizeOf.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMaximumSizeOf.setBounds(10, 96, 225, 30);
 		mainPanel.add(lblMaximumSizeOf);
 
 		MinListValueSpinner = new JSpinner();
+		MinListValueSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MinListValueSpinner.setModel(new SpinnerNumberModel(100, 1, 100000, 1));
-		MinListValueSpinner.setBounds(193, 127, 84, 23);
+		MinListValueSpinner.setBounds(232, 143, 105, 30);
 		mainPanel.add(MinListValueSpinner);
 
 		MaxListValueSpinner = new JSpinner();
+		MaxListValueSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MaxListValueSpinner.setModel(new SpinnerNumberModel(1000, 1, 100000, 1));
-		MaxListValueSpinner.setBounds(193, 161, 84, 23);
+		MaxListValueSpinner.setBounds(232, 189, 105, 30);
 		mainPanel.add(MaxListValueSpinner);
 
 		lblMinListValue = new JLabel("Minimum value");
 		lblMinListValue.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMinListValue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMinListValue.setBounds(10, 125, 173, 23);
+		lblMinListValue.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMinListValue.setBounds(10, 142, 225, 30);
 		mainPanel.add(lblMinListValue);
 
 		lblMaxListValue = new JLabel("Minimum value");
 		lblMaxListValue.setHorizontalAlignment(SwingConstants.CENTER);
-		lblMaxListValue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMaxListValue.setBounds(10, 159, 173, 23);
+		lblMaxListValue.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMaxListValue.setBounds(10, 189, 225, 30);
 		mainPanel.add(lblMaxListValue);
 
 		lblArraylist = new JLabel("ArrayList");
 		lblArraylist.setHorizontalAlignment(SwingConstants.CENTER);
-		lblArraylist.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblArraylist.setBounds(10, 5, 267, 23);
+		lblArraylist.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblArraylist.setBounds(10, 5, 309, 40);
 		mainPanel.add(lblArraylist);
 
 		lblSeed = new JLabel("Seed");
 		lblSeed.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSeed.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblSeed.setBounds(316, 5, 267, 23);
+		lblSeed.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblSeed.setBounds(460, 5, 302, 40);
 		mainPanel.add(lblSeed);
 
 		lblMinimumSeedValue = new JLabel("Minimum seed value:");
 		lblMinimumSeedValue.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMinimumSeedValue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMinimumSeedValue.setBounds(316, 37, 173, 23);
+		lblMinimumSeedValue.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMinimumSeedValue.setBounds(444, 53, 225, 30);
 		mainPanel.add(lblMinimumSeedValue);
 
 		lblMaximumSeedValue = new JLabel("Maximum seed value:");
 		lblMaximumSeedValue.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblMaximumSeedValue.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblMaximumSeedValue.setBounds(316, 73, 173, 23);
+		lblMaximumSeedValue.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMaximumSeedValue.setBounds(444, 96, 225, 30);
 		mainPanel.add(lblMaximumSeedValue);
 
 		MinSeedValueSpinner = new JSpinner();
+		MinSeedValueSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MinSeedValueSpinner.setModel(new SpinnerNumberModel(2, 1, 1000, 1));
-		MinSeedValueSpinner.setBounds(499, 39, 84, 23);
+		MinSeedValueSpinner.setBounds(678, 54, 84, 30);
 		mainPanel.add(MinSeedValueSpinner);
 
 		MaxSeedValueSpinner = new JSpinner();
+		MaxSeedValueSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MaxSeedValueSpinner.setModel(new SpinnerNumberModel(30, 1, 1000, 1));
-		MaxSeedValueSpinner.setBounds(499, 74, 84, 23);
+		MaxSeedValueSpinner.setBounds(678, 97, 84, 30);
 		mainPanel.add(MaxSeedValueSpinner);
 
 		lblNumberOfThreads = new JLabel("Number of Threads");
 		lblNumberOfThreads.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNumberOfThreads.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNumberOfThreads.setBounds(316, 127, 267, 23);
+		lblNumberOfThreads.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblNumberOfThreads.setBounds(460, 147, 302, 40);
 		mainPanel.add(lblNumberOfThreads);
 
 		NumberOfThreadsSpinner = new JSpinner();
+		NumberOfThreadsSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		NumberOfThreadsSpinner.setModel(new SpinnerNumberModel(5, 1, 10, 1));
-		NumberOfThreadsSpinner.setBounds(326, 162, 257, 23);
+		NumberOfThreadsSpinner.setBounds(460, 203, 302, 40);
 		mainPanel.add(NumberOfThreadsSpinner);
 
-		frame.setBounds(100, 100, 607, 348);
+		frame.setBounds(100, 100, 799, 446);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		btnStart.addActionListener(new ActionListener() {
