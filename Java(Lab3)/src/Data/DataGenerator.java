@@ -3,6 +3,8 @@ package Data;
 import java.util.ArrayList;
 import java.util.Random;
 
+import GUI.Frame;
+
 /**
  * The class responsible for generating the List of Double objects.
  * 
@@ -14,11 +16,14 @@ public class DataGenerator {
 	/**
 	 * The smallest list size possible to generate. (10^4)
 	 */
-	private static int minListSize = 10000;
+	private static int minListSize;
 	/**
 	 * The largest list size possible to generate (10^6)
 	 */
-	private static int maxListSize = 1000000;
+	private static int maxListSize;
+
+	private static int minValue;
+	private static int maxValue;
 
 	/**
 	 * <p>
@@ -36,12 +41,18 @@ public class DataGenerator {
 	 *            The largest list value possible to generate.
 	 * @return The generated list.
 	 */
-	public static ArrayList<Double> GenerateList(int seed, int minValue, int maxValue) {
+	public static ArrayList<Double> GenerateList(int seed) {
+		Frame dataFromframe = new Frame();
+
+		minListSize = (Integer) dataFromframe.MinListSizeSpinner.getValue();
+		maxListSize = (Integer) dataFromframe.MaxListSizeSpinner.getValue();
+		minValue = (Integer) dataFromframe.MinListValueSpinner.getValue();
+		maxValue = (Integer) dataFromframe.MaxListValueSpinner.getValue();
+
 		ArrayList<Double> list = new ArrayList<Double>();
 		Random random = new Random(seed);
 
 		int size = random.nextInt((maxListSize - minListSize) + 1) + minListSize;
-
 		for (int i = 0; i < size; i++)
 			list.add(minValue + (maxValue - minValue) * random.nextDouble());
 

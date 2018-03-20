@@ -2,13 +2,15 @@ package Threads;
 
 import java.util.Random;
 
+import GUI.Frame;
+
 import static java.lang.Thread.sleep;
 
 public class ThreadTarget implements Runnable {
 	private int id;
 	private Random random;
-	private int minSeed = 5;
-	private int maxSeed = 50;
+	private int minSeed;
+	private int maxSeed;
 	private int minTime = 100;
 	private int maxTime = 10000;
 	private ThreadManager threadManager;
@@ -36,12 +38,16 @@ public class ThreadTarget implements Runnable {
 	 */
 	public void run() {
 		random = new Random();
+		Frame data = new Frame();
+		maxSeed = (Integer) data.MaxSeedValueSpinner.getValue();
+		minSeed = (Integer) data.MinSeedValueSpinner.getValue();
 		while (true) {
+
 			int seed = random.nextInt(maxSeed - minSeed + 1) + minSeed;
 
 			System.out.println("Thread " + id + " seed " + seed);
 			System.out.println("Thread " + id + " seed " + seed + " average "
-					+ Data.Statistic.Average(threadManager.GetList(seed, 50, 100)));
+					+ Data.Statistic.Average(threadManager.GetList(seed)));
 
 			try {
 				//

@@ -22,13 +22,13 @@ public class Frame {
 
 	private JButton btnStart;
 
-	private JSpinner minListSizeSpinner;
-	private JSpinner maxListSizeSpinner;
-	private JSpinner minListValueSpinner;
-	private JSpinner maxListValueSpinner;
-	private JSpinner spinnerMinSeedValue;
-	private JSpinner spinnerMaxSeedValue;
-	private JSpinner spinnerNumberOfThreads;
+	public JSpinner MinListSizeSpinner;
+	public JSpinner MaxListSizeSpinner;
+	public JSpinner MinListValueSpinner;
+	public JSpinner MaxListValueSpinner;
+	public JSpinner MinSeedValueSpinner;
+	public JSpinner MaxSeedValueSpinner;
+	public JSpinner NumberOfThreadsSpinner;
 
 	private JLabel lblNewLabel;
 	private JLabel lblMaximumSizeOf;
@@ -84,17 +84,17 @@ public class Frame {
 		btnStart.setBounds(242, 240, 106, 40);
 		mainPanel.add(btnStart);
 
-		minListSizeSpinner = new JSpinner();
-		minListSizeSpinner
+		MinListSizeSpinner = new JSpinner();
+		MinListSizeSpinner
 				.setModel(new SpinnerNumberModel(new Long(10000), new Long(100), new Long(1000000), new Long(1)));
-		minListSizeSpinner.setBounds(193, 39, 84, 23);
-		mainPanel.add(minListSizeSpinner);
+		MinListSizeSpinner.setBounds(193, 39, 84, 23);
+		mainPanel.add(MinListSizeSpinner);
 
-		maxListSizeSpinner = new JSpinner();
-		maxListSizeSpinner
+		MaxListSizeSpinner = new JSpinner();
+		MaxListSizeSpinner
 				.setModel(new SpinnerNumberModel(new Long(1000000), new Long(100), new Long(2000000), new Long(1)));
-		maxListSizeSpinner.setBounds(193, 73, 84, 23);
-		mainPanel.add(maxListSizeSpinner);
+		MaxListSizeSpinner.setBounds(193, 73, 84, 23);
+		mainPanel.add(MaxListSizeSpinner);
 
 		lblNewLabel = new JLabel("Minimum size of the list:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -106,15 +106,15 @@ public class Frame {
 		lblMaximumSizeOf.setBounds(10, 73, 173, 23);
 		mainPanel.add(lblMaximumSizeOf);
 
-		minListValueSpinner = new JSpinner();
-		minListValueSpinner.setModel(new SpinnerNumberModel(100, 1, 100000, 1));
-		minListValueSpinner.setBounds(193, 127, 84, 23);
-		mainPanel.add(minListValueSpinner);
+		MinListValueSpinner = new JSpinner();
+		MinListValueSpinner.setModel(new SpinnerNumberModel(100, 1, 100000, 1));
+		MinListValueSpinner.setBounds(193, 127, 84, 23);
+		mainPanel.add(MinListValueSpinner);
 
-		maxListValueSpinner = new JSpinner();
-		maxListValueSpinner.setModel(new SpinnerNumberModel(1000, 1, 100000, 1));
-		maxListValueSpinner.setBounds(193, 161, 84, 23);
-		mainPanel.add(maxListValueSpinner);
+		MaxListValueSpinner = new JSpinner();
+		MaxListValueSpinner.setModel(new SpinnerNumberModel(1000, 1, 100000, 1));
+		MaxListValueSpinner.setBounds(193, 161, 84, 23);
+		mainPanel.add(MaxListValueSpinner);
 
 		lblMinListValue = new JLabel("Minimum value");
 		lblMinListValue.setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,15 +152,15 @@ public class Frame {
 		lblMaximumSeedValue.setBounds(316, 73, 173, 23);
 		mainPanel.add(lblMaximumSeedValue);
 
-		spinnerMinSeedValue = new JSpinner();
-		spinnerMinSeedValue.setModel(new SpinnerNumberModel(2, 1, 1000, 1));
-		spinnerMinSeedValue.setBounds(499, 39, 84, 23);
-		mainPanel.add(spinnerMinSeedValue);
+		MinSeedValueSpinner = new JSpinner();
+		MinSeedValueSpinner.setModel(new SpinnerNumberModel(2, 1, 1000, 1));
+		MinSeedValueSpinner.setBounds(499, 39, 84, 23);
+		mainPanel.add(MinSeedValueSpinner);
 
-		spinnerMaxSeedValue = new JSpinner();
-		spinnerMaxSeedValue.setModel(new SpinnerNumberModel(30, 1, 1000, 1));
-		spinnerMaxSeedValue.setBounds(499, 74, 84, 23);
-		mainPanel.add(spinnerMaxSeedValue);
+		MaxSeedValueSpinner = new JSpinner();
+		MaxSeedValueSpinner.setModel(new SpinnerNumberModel(30, 1, 1000, 1));
+		MaxSeedValueSpinner.setBounds(499, 74, 84, 23);
+		mainPanel.add(MaxSeedValueSpinner);
 
 		lblNumberOfThreads = new JLabel("Number of Threads");
 		lblNumberOfThreads.setHorizontalAlignment(SwingConstants.CENTER);
@@ -168,10 +168,10 @@ public class Frame {
 		lblNumberOfThreads.setBounds(316, 127, 267, 23);
 		mainPanel.add(lblNumberOfThreads);
 
-		spinnerNumberOfThreads = new JSpinner();
-		spinnerNumberOfThreads.setModel(new SpinnerNumberModel(5, 1, 10, 1));
-		spinnerNumberOfThreads.setBounds(326, 162, 257, 23);
-		mainPanel.add(spinnerNumberOfThreads);
+		NumberOfThreadsSpinner = new JSpinner();
+		NumberOfThreadsSpinner.setModel(new SpinnerNumberModel(5, 1, 10, 1));
+		NumberOfThreadsSpinner.setBounds(326, 162, 257, 23);
+		mainPanel.add(NumberOfThreadsSpinner);
 
 		frame.setBounds(100, 100, 607, 348);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

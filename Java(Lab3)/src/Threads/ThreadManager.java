@@ -66,22 +66,20 @@ public class ThreadManager {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<ThreadTarget> GetList(int seed, int minValue, int maxValue) {
+	public ArrayList<ThreadTarget> GetList(int seed) {
 
 		synchronized (hashMap) {
 
 			System.out.println("Requesting " + seed);
 
 			// If the specified key is not already associated with a value ...
-			hashMap.putIfAbsent(seed,
-					new SoftReference<>(DataGenerator.GenerateList(seed, minValue, maxValue), referenceQueue));
+			hashMap.putIfAbsent(seed, new SoftReference<>(DataGenerator.GenerateList(seed), referenceQueue));
 
 			// Create a new list and overwrite the old list if data beyond memory-sensitive
 			// caches
 			if (hashMap.get(seed).get() == null) {
 				System.out.println("Seed " + seed + " not found");
-				hashMap.put(seed,
-						new SoftReference<>(DataGenerator.GenerateList(seed, minValue, maxValue), referenceQueue));
+				hashMap.put(seed, new SoftReference<>(DataGenerator.GenerateList(seed), referenceQueue));
 			}
 
 			@SuppressWarnings("rawtypes")
