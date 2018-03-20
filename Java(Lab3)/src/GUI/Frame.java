@@ -13,6 +13,9 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import Threads.ThreadManager;
+
 import java.awt.Font;
 
 public class Frame {
@@ -39,6 +42,7 @@ public class Frame {
 	private JLabel lblMinimumSeedValue;
 	private JLabel lblMaximumSeedValue;
 	private JLabel lblNumberOfThreads;
+	ThreadManager threadManager;
 
 	/**
 	 * Launch the application.
@@ -90,14 +94,14 @@ public class Frame {
 		MinListSizeSpinner = new JSpinner();
 		MinListSizeSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MinListSizeSpinner
-				.setModel(new SpinnerNumberModel(new Long(10000), new Long(100), new Long(1000000), new Long(1)));
+				.setModel(new SpinnerNumberModel(10000, 100, 1000000, 1));
 		MinListSizeSpinner.setBounds(232, 54, 105, 30);
 		mainPanel.add(MinListSizeSpinner);
 
 		MaxListSizeSpinner = new JSpinner();
 		MaxListSizeSpinner.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		MaxListSizeSpinner
-				.setModel(new SpinnerNumberModel(new Long(1000000), new Long(100), new Long(2000000), new Long(1)));
+				.setModel(new SpinnerNumberModel(1000000, 100, 2000000, 1));
 		MaxListSizeSpinner.setBounds(232, 97, 105, 30);
 		mainPanel.add(MaxListSizeSpinner);
 
@@ -192,10 +196,8 @@ public class Frame {
 				Program program = new Program();
 				frame.getContentPane().add(program);
 				program.setVisible(true);
-			//	frame.add(program.middlePanel);
-			////	frame.pack();
-			//	frame.setLocationRelativeTo(null);
-			//	frame.setVisible(true);
+				threadManager = new ThreadManager((Integer) NumberOfThreadsSpinner.getValue());
+
 			}
 		});
 

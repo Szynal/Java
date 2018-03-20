@@ -3,6 +3,7 @@ package Threads;
 import java.util.Random;
 
 import GUI.Frame;
+import GUI.Program;
 
 import static java.lang.Thread.sleep;
 
@@ -14,6 +15,7 @@ public class ThreadTarget implements Runnable {
 	private int minTime = 100;
 	private int maxTime = 10000;
 	private ThreadManager threadManager;
+	Program program;
 
 	/**
 	 * *
@@ -39,15 +41,16 @@ public class ThreadTarget implements Runnable {
 	public void run() {
 		random = new Random();
 		Frame data = new Frame();
+
 		maxSeed = (Integer) data.MaxSeedValueSpinner.getValue();
 		minSeed = (Integer) data.MinSeedValueSpinner.getValue();
 		while (true) {
 
 			int seed = random.nextInt(maxSeed - minSeed + 1) + minSeed;
 
-			System.out.println("Thread " + id + " seed " + seed);
-			System.out.println("Thread " + id + " seed " + seed + " average "
-					+ Data.Statistic.Average(threadManager.GetList(seed)));
+			Program.textArea.append("Thread " + id + " seed " + seed + "\n");
+			Program.textArea.append("Thread " + id + " seed " + seed + " average "
+					+ Data.Statistic.Average(threadManager.GetList(seed)) + "\n");
 
 			try {
 				//
@@ -59,7 +62,7 @@ public class ThreadTarget implements Runnable {
 	}
 
 	public void StartTreadInfo(int id) {
-		System.out.println("Thread " + id + " start working");
+		Program.textArea.append("Thread " + id + " start working" + "\n");
 	}
 
 }

@@ -1,6 +1,7 @@
 package Threads;
 
 import Data.DataGenerator;
+import GUI.Program;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ThreadManager {
-
+	Program program;
 	/**
 	 * <p>
 	 * List of threads
@@ -70,7 +71,7 @@ public class ThreadManager {
 
 		synchronized (hashMap) {
 
-			System.out.println("Requesting " + seed);
+			Program.textArea.append("Requesting " + seed + "\n");
 
 			// If the specified key is not already associated with a value ...
 			hashMap.putIfAbsent(seed, new SoftReference<>(DataGenerator.GenerateList(seed), referenceQueue));
@@ -78,7 +79,7 @@ public class ThreadManager {
 			// Create a new list and overwrite the old list if data beyond memory-sensitive
 			// caches
 			if (hashMap.get(seed).get() == null) {
-				System.out.println("Seed " + seed + " not found");
+				Program.textArea.append("Seed " + seed + " not found\n");
 				hashMap.put(seed, new SoftReference<>(DataGenerator.GenerateList(seed), referenceQueue));
 			}
 

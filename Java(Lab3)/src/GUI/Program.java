@@ -10,7 +10,7 @@ public class Program extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	public JScrollPane scrollPane;
-	public JTextArea textArea;
+	public static JTextArea textArea;
 
 	/**
 	 * Create the panel.
