@@ -192,7 +192,10 @@ public class Frame {
 				Program program = new Program();
 				frame.getContentPane().add(program);
 				program.setVisible(true);
-
+			//	frame.add(program.middlePanel);
+			////	frame.pack();
+			//	frame.setLocationRelativeTo(null);
+			//	frame.setVisible(true);
 			}
 		});
 

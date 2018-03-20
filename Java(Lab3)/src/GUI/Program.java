@@ -1,14 +1,16 @@
 package GUI;
 
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 public class Program extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
+	public JScrollPane scrollPane;
+	public JTextArea textArea;
 
 	/**
 	 * Create the panel.
@@ -16,11 +18,15 @@ public class Program extends JPanel {
 	public Program() {
 		setLayout(null);
 
-		textField = new JTextField();
-		textField.setBounds(91, 53, 266, 205);
-		add(textField);
-		textField.setColumns(10);
+		scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setBounds(15, 16, 770, 343);
+		add(scrollPane);
+
+		textArea = new JTextArea();
+		textArea.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		scrollPane.setViewportView(textArea);
 
 	}
-
 }
