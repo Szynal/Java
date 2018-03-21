@@ -1,8 +1,9 @@
 package Data;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+
+import GUI.Frame;
 
 /**
  * The class responsible for generating the List of Double objects.
@@ -13,13 +14,16 @@ import java.util.Random;
 public class DataGenerator {
 
 	/**
-	 * The smallest list size possible to generate. (10^6)
+	 * The smallest list size possible to genera
 	 */
-	private static int minListSize = 1000000;
+	private static int minListSize;
 	/**
-	 * The largest list size possible to generate (10^9)
+	 * The largest list size possible to generate
 	 */
-	private static int maxListSize = 100000000;
+	private static int maxListSize;
+
+	private static int minValue;
+	private static int maxValue;
 
 	/**
 	 * <p>
@@ -37,12 +41,18 @@ public class DataGenerator {
 	 *            The largest list value possible to generate.
 	 * @return The generated list.
 	 */
-	public static List<Double> GenerateList(long seed, int minValue, int maxValue) {
-		List<Double> list = new ArrayList<Double>();
+	public static ArrayList<Double> GenerateList(int seed) {
+		Frame dataFromframe = new Frame();
+
+		minListSize = (Integer) dataFromframe.MinListSizeSpinner.getValue();
+		maxListSize = (Integer) dataFromframe.MaxListSizeSpinner.getValue();
+		minValue = (Integer) dataFromframe.MinListValueSpinner.getValue();
+		maxValue = (Integer) dataFromframe.MaxListValueSpinner.getValue();
+
+		ArrayList<Double> list = new ArrayList<Double>();
 		Random random = new Random(seed);
 
 		int size = random.nextInt((maxListSize - minListSize) + 1) + minListSize;
-
 		for (int i = 0; i < size; i++)
 			list.add(minValue + (maxValue - minValue) * random.nextDouble());
 
