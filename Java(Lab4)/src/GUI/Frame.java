@@ -10,19 +10,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.JList;
-import javax.swing.JComboBox;
 
 public class Frame {
 
-	private JFrame frmLabRefleksja;
+	private JFrame frame;
 	private JPanel mainPanel;
 
 	private JButton btnStart;
@@ -42,7 +39,7 @@ public class Frame {
 			public void run() {
 				try {
 					Frame window = new Frame();
-					window.frmLabRefleksja.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -62,24 +59,24 @@ public class Frame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmLabRefleksja = new JFrame();
-		frmLabRefleksja.setResizable(false);
-		frmLabRefleksja.setAutoRequestFocus(false);
-		frmLabRefleksja.setFont(new Font("Arial", Font.PLAIN, 18));
-		frmLabRefleksja.setIconImage(
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setAutoRequestFocus(false);
+		frame.setFont(new Font("Arial", Font.PLAIN, 18));
+		frame.setIconImage(
 				Toolkit.getDefaultToolkit().getImage("C:\\Users\\PSzynal\\Documents\\Java\\Java(Lab4)\\img\\pwr.png"));
-		frmLabRefleksja.setTitle("Lab 4. Refleksja i \u0142adowanie klas.");
-		frmLabRefleksja.getContentPane().setEnabled(false);
-		frmLabRefleksja.getContentPane().setLayout(new CardLayout(0, 0));
+		frame.setTitle("Lab 4. Refleksja i \u0142adowanie klas.");
+		frame.getContentPane().setEnabled(false);
+		frame.getContentPane().setLayout(new CardLayout(0, 0));
 
 		mainPanel = new JPanel();
 
-		frmLabRefleksja.getContentPane().add(mainPanel, "name_7978325211185");
+		frame.getContentPane().add(mainPanel, "name_7978325211185");
 		mainPanel.setLayout(null);
 
 		btnStart = new JButton("Start");
 		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnStart.setBounds(10, 374, 475, 40);
+		btnStart.setBounds(10, 299, 475, 40);
 		mainPanel.add(btnStart);
 
 		lblTSP = new JLabel("Travelling salesman problem");
@@ -135,28 +132,28 @@ public class Frame {
 		spinner.setEnabled(false);
 		spinner.setBounds(163, 102, 284, 20);
 		mainPanel.add(spinner);
-		
+
 		lblNumberOfCities = new JLabel("Number of cities");
 		lblNumberOfCities.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumberOfCities.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblNumberOfCities.setBounds(39, 101, 114, 21);
 		mainPanel.add(lblNumberOfCities);
-		
+
 		lblFilePath = new JLabel("FIle path");
 		lblFilePath.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFilePath.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblFilePath.setBounds(29, 200, 80, 21);
 		mainPanel.add(lblFilePath);
 
-		frmLabRefleksja.setBounds(100, 100, 501, 454);
-		frmLabRefleksja.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 501, 386);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPanel.setVisible(false);
-				// Program program = new Program();
-				// frame.getContentPane().add(program);
-				// program.setVisible(true);
+				Program program = new Program();
+				frame.getContentPane().add(program);
+				program.setVisible(true);
 
 			}
 		});
