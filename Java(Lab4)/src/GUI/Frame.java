@@ -15,6 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import java.awt.Font;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.JList;
+import javax.swing.JComboBox;
 
 public class Frame {
 
@@ -23,6 +27,12 @@ public class Frame {
 
 	private JButton btnStart;
 	private JLabel lblTSP;
+	private JTextField textFieldCityPath;
+	private JRadioButton rdbtnRandomCity;
+	private JRadioButton rdbtnCityFromFile;
+	private JSpinner spinner;
+	private JLabel lblNumberOfCities;
+	private JLabel lblFilePath;
 
 	/**
 	 * Launch the application.
@@ -45,6 +55,7 @@ public class Frame {
 	 */
 	public Frame() {
 		initialize();
+
 	}
 
 	/**
@@ -55,7 +66,8 @@ public class Frame {
 		frmLabRefleksja.setResizable(false);
 		frmLabRefleksja.setAutoRequestFocus(false);
 		frmLabRefleksja.setFont(new Font("Arial", Font.PLAIN, 18));
-		frmLabRefleksja.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\PSzynal\\Documents\\Java\\Java(Lab4)\\img\\pwr.png"));
+		frmLabRefleksja.setIconImage(
+				Toolkit.getDefaultToolkit().getImage("C:\\Users\\PSzynal\\Documents\\Java\\Java(Lab4)\\img\\pwr.png"));
 		frmLabRefleksja.setTitle("Lab 4. Refleksja i \u0142adowanie klas.");
 		frmLabRefleksja.getContentPane().setEnabled(false);
 		frmLabRefleksja.getContentPane().setLayout(new CardLayout(0, 0));
@@ -76,16 +88,76 @@ public class Frame {
 		lblTSP.setBounds(10, 5, 475, 40);
 		mainPanel.add(lblTSP);
 
+		rdbtnRandomCity = new JRadioButton("Generate a random city");
+		rdbtnRandomCity.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (rdbtnRandomCity.isSelected()) {
+					rdbtnCityFromFile.setSelected(false);
+					spinner.setEnabled(true);
+					textFieldCityPath.setEnabled(false);
+
+				}
+				if (rdbtnRandomCity.isSelected() == false) {
+					spinner.setEnabled(false);
+				}
+			}
+		});
+		rdbtnRandomCity.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		rdbtnRandomCity.setBounds(29, 64, 178, 30);
+		mainPanel.add(rdbtnRandomCity);
+
+		rdbtnCityFromFile = new JRadioButton("Load city from file");
+		rdbtnCityFromFile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (rdbtnCityFromFile.isSelected()) {
+					rdbtnCityFromFile.setSelected(false);
+					textFieldCityPath.setEnabled(true);
+
+				}
+				if (rdbtnCityFromFile.isSelected() == false) {
+					rdbtnCityFromFile.setSelected(true);
+					rdbtnRandomCity.setSelected(false);
+					spinner.setEnabled(false);
+				}
+			}
+		});
+		rdbtnCityFromFile.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		rdbtnCityFromFile.setBounds(29, 163, 178, 30);
+		mainPanel.add(rdbtnCityFromFile);
+
+		textFieldCityPath = new JTextField();
+		textFieldCityPath.setEnabled(false);
+		textFieldCityPath.setBounds(119, 200, 328, 20);
+		mainPanel.add(textFieldCityPath);
+		textFieldCityPath.setColumns(10);
+
+		spinner = new JSpinner();
+		spinner.setEnabled(false);
+		spinner.setBounds(163, 102, 284, 20);
+		mainPanel.add(spinner);
+		
+		lblNumberOfCities = new JLabel("Number of cities");
+		lblNumberOfCities.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNumberOfCities.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblNumberOfCities.setBounds(39, 101, 114, 21);
+		mainPanel.add(lblNumberOfCities);
+		
+		lblFilePath = new JLabel("FIle path");
+		lblFilePath.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblFilePath.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblFilePath.setBounds(29, 200, 80, 21);
+		mainPanel.add(lblFilePath);
+
 		frmLabRefleksja.setBounds(100, 100, 501, 454);
 		frmLabRefleksja.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		btnStart.addActionListener(new ActionListener(	) {
+		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mainPanel.setVisible(false);
-			//	Program program = new Program();
-			//	frame.getContentPane().add(program);
-			//	program.setVisible(true);
-		
+				// Program program = new Program();
+				// frame.getContentPane().add(program);
+				// program.setVisible(true);
+
 			}
 		});
 
