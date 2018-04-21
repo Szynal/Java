@@ -24,12 +24,13 @@ public class Frame {
 
 	private JButton btnStart;
 	private JLabel lblTSP;
-	private JTextField textFieldCityPath;
-	private JRadioButton rdbtnRandomCity;
-	private JRadioButton rdbtnCityFromFile;
-	private JSpinner spinner;
 	private JLabel lblNumberOfCities;
 	private JLabel lblFilePath;
+
+	public JTextField textFieldCityPath;
+	public JRadioButton rdbtnRandomCity;
+	public JRadioButton rdbtnCityFromFile;
+	public JSpinner spinner;
 
 	/**
 	 * Launch the application.
@@ -150,8 +151,9 @@ public class Frame {
 
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				mainPanel.setVisible(false);
-				Program program = new Program();
+				Program program = new Program(textFieldCityPath, rdbtnRandomCity, rdbtnCityFromFile, spinner);
 				frame.getContentPane().add(program);
 				program.setVisible(true);
 
