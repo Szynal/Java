@@ -20,10 +20,11 @@ public class TSP {
 	private int tmpSum = 0;
 
 	private int counterTransition = 0;
-	private int counter = 0, tmpCounter = 0;
+	private int counter = 0;
+	private int tmpCounter = 0;
 	private int[] listOfTempVertex;
 	private boolean used[][];
-	
+
 	private String newRow;
 	private BufferedReader br = null;
 
@@ -189,7 +190,14 @@ public class TSP {
 		TSP1(graf, end, 0, 1, path);
 	}
 
-	public void naive(int vertex) {
+	public void naive(int vertex, String fileName) {
+
+		try {
+			loadFromFile(fileName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		listOfTempVertex[tmpCounter] = vertex;// wierzcholek obecnie "omawiany", dodany do puli
 		tmpCounter++;
@@ -201,7 +209,7 @@ public class TSP {
 															// nie byl jeszcze odwiedzony
 				{
 					tmpSum += getGraf()[vertex][i];// suma tymczasowa zwiekszana jest o te droge
-					naive(i);
+					naive(i, fileName);
 					tmpSum -= getGraf()[vertex][i];
 				}
 			visited[vertex] = false;// wyzerowanie wierzcholkow dla poszukiwania nastepnego

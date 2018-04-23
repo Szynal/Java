@@ -20,6 +20,21 @@ import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextArea;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.awt.event.ActionEvent;
+
 import TSP.TSP;
 
 public class Program extends JPanel {
@@ -38,7 +53,13 @@ public class Program extends JPanel {
 	double EndTime;
 	double TimeOfOp;
 
-	TSP salesman = new TSP();
+	private int[][] graf;
+	private int dimension;
+	private Class c1;
+	private Class c2;
+	private Object obj;
+	private Method[] m1;
+	private Method[] m2;
 
 	/**
 	 * Create the panel.
@@ -115,22 +136,51 @@ public class Program extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 
 				if (rdbtnCityFromFile.isSelected()) {
-					salesman = new TSP();
-					try {
-						salesman.loadFromFile(textFieldCityPath.getText() + ".txt");
-					} catch (IOException e) {
-						e.printStackTrace();
-						StringWriter errors = new StringWriter();
-						e.printStackTrace(new PrintWriter(errors));
-						textArea.setText(errors.toString());
-					}
-
+					TSP salesman = new TSP();
+					/*
+					 * try { salesman.loadFromFile(); } catch (IOException e) { e.printStackTrace();
+					 * StringWriter errors = new StringWriter(); e.printStackTrace(new
+					 * PrintWriter(errors)); textArea.setText(errors.toString()); }
+					 */
 					if (rdbtnBruteForce.isSelected()) {
+
+						try {
+							c1 = Class.forName("TSP.TSP");
+
+							m1 = c1.getMethods();
+							int funcno = 0;
+							for (int i = 0; i < m1.length; i++) {
+								System.out.println(m1[i].getName() + "\n");
+								if (m1[i].getName() == "naive") {
+									funcno = i;
+								}
+							}
+							Object newGene = c1.newInstance();
+							m1[funcno].invoke(newGene, 0, (textFieldCityPath.getText() + ".txt"));
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (SecurityException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (InstantiationException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (InvocationTargetException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
 						textArea.setText("File: " + textFieldCityPath.getText() + "\n" + "Algorithm: "
 								+ rdbtnBruteForce.getText() + "\n" + "Solution: ");
 						StartTime = System.nanoTime();
-						salesman.naive(0);
+						salesman.naive(0, (textFieldCityPath.getText() + ".txt"));
 						EndTime = System.nanoTime();
 						TimeOfOp = EndTime - StartTime;
 						textArea.append(salesman.display());
@@ -139,6 +189,7 @@ public class Program extends JPanel {
 						textArea.append(String.valueOf(" milliseconds"));
 
 					}
+
 					if (rdbtnBandB.isSelected()) {
 						textArea.setText("File: " + textFieldCityPath.getText() + "\n" + "Algorithm: "
 								+ rdbtnBandB.getText() + "\n" + "Solution: ");
@@ -157,7 +208,7 @@ public class Program extends JPanel {
 				}
 
 				if (rdbtnRandomCity.isSelected()) {
-
+					TSP salesman = new TSP();
 					salesman.generateCities((Integer) spinner.getValue());
 
 					/*
@@ -172,7 +223,7 @@ public class Program extends JPanel {
 						textArea.append("\n");
 						textArea.append("Solution: ");
 						StartTime = System.nanoTime();
-						salesman.naive(0);
+						salesman.naive(0, (textFieldCityPath.getText() + ".txt"));
 						EndTime = System.nanoTime();
 						TimeOfOp = EndTime - StartTime;
 						textArea.append(salesman.display());
