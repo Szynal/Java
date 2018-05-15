@@ -109,16 +109,27 @@ public class Window {
 
 	}
 
+	/**
+	 * 
+	 * @return actrion
+	 */
 	public Action getAction() {
 		return action;
 	}
 
+	/**
+	 * Ta klasa udostêpnia domyœlne implementacje interfejsu JFC. Wspiera JavaBeans
+	 * 
+	 * @author PSzynal
+	 *
+	 */
 	private class SwingAction extends AbstractAction {
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 1L;
 
+		/**
+		 * Ustawia wartoœæ o okreœlonej wartoœæi.s
+		 */
 		public SwingAction() {
 			putValue(NAME, "SwingAction");
 			putValue(SHORT_DESCRIPTION, "Some short description");

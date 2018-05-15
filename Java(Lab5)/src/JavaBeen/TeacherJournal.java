@@ -1,4 +1,4 @@
-package bean;
+package JavaBeen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,39 +9,55 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.beans.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class AdviceJComponent extends JComponent
-		implements Serializable, PropertyChangeListener, VetoableChangeListener {
+/**
+ * Zairenko javt przdstawia notatnik
+ * 
+ * for reference, look here: <a href=
+ * "http://tomasz.kubik.staff.iiar.pwr.wroc.pl/dydaktyka/Java/JavaWyk08-JBeans-TK.pdf">Java
+ * Beans </a>
+ * 
+ * @author PSzynal
+ *
+ */
+public class TeacherJournal extends JComponent implements Serializable, PropertyChangeListener, VetoableChangeListener {
 
 	private static final long serialVersionUID = 1L;
+
 	private PropertyChangeSupport propertyChangeListeners = new PropertyChangeSupport(this);
 	private VetoableChangeSupport vetoableChangeSupport = new VetoableChangeSupport(this);
 
-	private String title;
-	private String body;
-	private int sum;
-	private int amount;
-	private int maxRate = 1;
+	private String student;
+	private String test;
+	private int averageGrade;
+	private int rate;
+	private int maxRate = 5;
+	private int tests_number = 0;
+
 	@SuppressWarnings("rawtypes")
+
 	private DefaultComboBoxModel model;
 
-	public AdviceJComponent() {
+	public TeacherJournal() {
 		propertyChangeListeners.addPropertyChangeListener(this);
 		vetoableChangeSupport.addVetoableChangeListener(this);
-		this.title = "Title";
-		this.body = "Body";
-		this.sum = 0;
-		this.amount = 0;
+		this.student = "Student";
+		this.test = "Test";
+		this.averageGrade = 0;
+		this.rate = 0;
 		initComponents();
 	}
 
-	public void setTitle(String title) throws PropertyVetoException {
-		String oldTitle = title;
-		vetoableChangeSupport.fireVetoableChange(new PropertyChangeEvent(this, "title", oldTitle, title));
+	public void setTitle(String student) throws PropertyVetoException {
+		String student_name = student;
+		// wysy³a zdarzenie zmian w³¹sciwoœci ziarenka
+		vetoableChangeSupport.fireVetoableChange(new PropertyChangeEvent(this, "Student", student_name, student));
 
-		this.title = title;
+		this.student = student;
 
-		setBorder(BorderFactory.createTitledBorder(title));
+		setBorder(BorderFactory.createTitledBorder(student));
 	}
 
 	public int getMaxRate() {
@@ -62,23 +78,30 @@ public class AdviceJComponent extends JComponent
 	JButton btnAddRate;
 
 	private void addRate(int rate) {
-		this.sum += rate;
-		this.amount++;
-		if (amount > 0)
-			jLabelAverage.setText(Float.toString((float) sum / (float) amount));
+		this.averageGrade += rate;
+		this.tests_number++;
+		if (tests_number > 0) {
+			jLabelAverage.setText(Float.toString((float) averageGrade / tests_number));
+		}
+
 		else
 			jLabelAverage.setText("0.0");
 	}
 
 	private void initComponents() {
 		setMinimumSize(new Dimension(200, 300));
-		setBorder(BorderFactory.createTitledBorder(title));
+		setBorder(BorderFactory.createTitledBorder(student));
 
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
 		setLayout(layout);
 
-		btnAddRate = new JButton("OK");
+		btnAddRate = new JButton("Oce\u0144");
+		btnAddRate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		constraints.gridx = 2;
 		constraints.gridy = 7;
 		constraints.gridwidth = 1;
@@ -98,7 +121,7 @@ public class AdviceJComponent extends JComponent
 		add(btnAddRate);
 
 		jTextAreaBody = new JTextArea(2, 10);
-		jTextAreaBody.setText(body);
+		jTextAreaBody.setText(test);
 		JScrollPane scpArea = new JScrollPane(jTextAreaBody);
 		constraints.gridx = 0;
 		constraints.gridy = 1;
@@ -126,8 +149,8 @@ public class AdviceJComponent extends JComponent
 		layout.setConstraints(jComboBoxRates, constraints);
 		add(jComboBoxRates);
 
-		if (amount != 0)
-			jLabelAverage = new JLabel(Float.toString((float) sum / (float) amount));
+		if (rate != 0)
+			jLabelAverage = new JLabel(Float.toString((float) averageGrade));
 		else
 			jLabelAverage = new JLabel("0.0");
 		constraints.gridx = 0;
@@ -142,48 +165,50 @@ public class AdviceJComponent extends JComponent
 		add(jLabelAverage);
 	}
 
-	public String getTitle() {
-		return title;
+	public String getStudent() {
+		return student;
 	}
 
-	public void setBody(String body) {
-		this.body = body;
-		this.jTextAreaBody.setText(body);
+	public void setTest(String test) {
+		this.test = test;
+		this.jTextAreaBody.setText(test);
 
 	}
 
-	public String getBody() {
-		return body;
+	public String getTest() {
+		return test;
 	}
 
-	public void setSum(int sum) {
-		this.sum = sum;
-		if (amount > 0)
-			jLabelAverage.setText(Float.toString((float) sum / (float) amount));
+	public void setAverage(int sum) {
+		this.averageGrade = sum;
+		if (rate > 0)
+			jLabelAverage.setText(Float.toString((((float) sum + (float) rate)) / (float) tests_number));
 		else
 			jLabelAverage.setText("0.0");
 	}
 
-	public int getSum() {
-		return sum;
+	public int getAverage() {
+		return averageGrade;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-		if (amount > 0)
-			jLabelAverage.setText(Float.toString((float) sum / (float) amount));
+	public void setRate(int mark) {
+		this.rate = mark;
+		if (mark > 0)
+			jLabelAverage.setText(Float.toString(((float) averageGrade + (float) mark) / tests_number));
 		else
 			jLabelAverage.setText("0.0");
 	}
 
-	public int getAmount() {
-		return amount;
+	public int getRate() {
+		return rate;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
+	/**
+	 * Ta metoda zostanie wywo³ana, gdy w³aœciwoœæ zostanie zmieniona.
+	 */
 	public synchronized void propertyChange(PropertyChangeEvent evt) {
-		// setBody("propChange");
 		evt.getPropertyName();
 		maxRate = (int) evt.getNewValue();
 		String[] dataRates = new String[maxRate];
@@ -203,11 +228,11 @@ public class AdviceJComponent extends JComponent
 
 	@Override
 	public void vetoableChange(PropertyChangeEvent evt) throws PropertyVetoException {
-		setBody("vetoableChange");
+		setTest("vetoableChange");
 		if ((String) evt.getNewValue() == "aaa")
 			throw new PropertyVetoException("", evt);
 		else
-			title = evt.getNewValue().toString();
+			student = evt.getNewValue().toString();
 	}
 
 	public void removeVetoableChangeListener(VetoableChangeListener l) {

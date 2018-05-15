@@ -1,4 +1,4 @@
-package bean;
+package SwingAction;
 
 import java.awt.event.ActionEvent;
 
