@@ -1,4 +1,4 @@
-package TestGUI;
+package GUI;
 
 import java.awt.EventQueue;
 import java.beans.PropertyVetoException;

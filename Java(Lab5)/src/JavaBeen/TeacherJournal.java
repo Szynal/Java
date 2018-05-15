@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
- * Zairenko javt przdstawia notatnik
+ * Zairenko javy przdstawia dziennik nauczycielski
  * 
  * for reference, look here: <a href=
  * "http://tomasz.kubik.staff.iiar.pwr.wroc.pl/dydaktyka/Java/JavaWyk08-JBeans-TK.pdf">Java
@@ -96,7 +96,7 @@ public class TeacherJournal extends JComponent implements Serializable, Property
 		GridBagConstraints constraints = new GridBagConstraints();
 		setLayout(layout);
 
-		btnAddRate = new JButton("Oce\u0144");
+		btnAddRate = new JButton("Oce\u0144"); // oceñ ^^ -> ñ
 		btnAddRate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

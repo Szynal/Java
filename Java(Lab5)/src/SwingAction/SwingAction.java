@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+/**
+ * Dodaje Ÿród³a sygnalu zmieniaj¹cego wartoœæ wi¹zana
+ * 
+ * @author Pawe³ Szynal
+ *
+ */
 public class SwingAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
