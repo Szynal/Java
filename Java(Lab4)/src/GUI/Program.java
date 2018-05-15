@@ -7,9 +7,6 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -22,8 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
-import TSP.TSP;
 
 public class Program extends JPanel {
 	public JScrollPane scrollPane;
@@ -129,17 +124,46 @@ public class Program extends JPanel {
 					// salesman = new TSP();
 
 					try {
-						c2 = Class.forName("TSP.TSP");
+						c1 = Class.forName("TSP.BandB");
+						c2 = Class.forName("TSP.BruteForce");
+
+						int classmodi1 = c1.getModifiers();
 						int classmodi2 = c2.getModifiers();
+
 						textArea.setText(Modifier.isPublic(classmodi2) + "\n");
+
+						Class[] neighint1 = c1.getInterfaces();
+						Class neighsuper1 = c1.getSuperclass();
+
 						Class[] neighint = c2.getInterfaces();
 						Class neighsuper = c2.getSuperclass();
+
+						m1 = c1.getMethods();
 						m2 = c2.getMethods();
-						int funcno2 = 0;
-						int loadfun = 0;
-						int disfun = 0;
-						int getgraf = 0;
-						int tsp = 0;
+
+						int funcno2 = 0, funcno1 = 0;
+						int loadfun = 0, loadfun1 = 0;
+						int disfun = 0, disfun1 = 0;
+						int getgraf1 = 0;
+						int tsp = 0, tsp1 = 0;
+
+						for (int i = 0; i < m1.length; i++) {
+							System.out.println(m1[i].getName() + "\n");
+							if (m1[i].getName() == "TSP") {
+								funcno1 = i;
+							}
+							if (m1[i].getName() == "loadFromFile") {
+								loadfun1 = i;
+							}
+							if (m1[i].getName() == "display") {
+								disfun1 = i;
+							}
+							if (m1[i].getName() == "getGraf") {
+								getgraf1 = i;
+							}
+
+						}
+
 						for (int i = 0; i < m2.length; i++) {
 							System.out.println(m2[i].getName() + "\n");
 							if (m2[i].getName() == "naive") {
@@ -153,30 +177,36 @@ public class Program extends JPanel {
 							}
 
 						}
-						Object newNeigh = c2.newInstance();
 
-						m2[loadfun].invoke(newNeigh, (textFieldCityPath.getText() + ".txt"));
+						Object class1_obj = c1.newInstance();
+						Object class2_obj = c2.newInstance();
+
+						m1[loadfun1].invoke(class1_obj, (textFieldCityPath.getText() + ".txt"));
+						m2[loadfun].invoke(class2_obj, (textFieldCityPath.getText() + ".txt"));
+
 						if (rdbtnBruteForce.isSelected()) {
 
 							textArea.setText("File: " + textFieldCityPath.getText() + "\n" + "Algorithm: "
 									+ rdbtnBruteForce.getText() + "\n" + "Solution: ");
 							StartTime = System.nanoTime();
-							m2[funcno2].invoke(newNeigh, 0);
+							m2[funcno2].invoke(class2_obj, 0);
 							EndTime = System.nanoTime();
 							TimeOfOp = EndTime - StartTime;
-							textArea.append((String) m2[disfun].invoke(newNeigh));
+							textArea.append((String) m2[disfun].invoke(class2_obj));
 							textArea.append("\nCalculation time: ");
 							textArea.append(String.valueOf(TimeOfOp));
 							textArea.append(String.valueOf(" milliseconds"));
 
 						}
 						if (rdbtnBandB.isSelected()) {
+
 							textArea.setText("File: " + textFieldCityPath.getText() + "\n" + "Algorithm: "
-									+ rdbtnBandB.getText() + "\n" + "Solution: ");
+									+ rdbtnBruteForce.getText() + "\n" + "Solution: ");
 							StartTime = System.nanoTime();
-							// salesman.TSP(salesman.getGraf());
+							m1[funcno1].invoke(class1_obj, m1[getgraf1].invoke(class1_obj));
+							EndTime = System.nanoTime();
 							TimeOfOp = EndTime - StartTime;
-							// textArea.append(salesman.display());
+							textArea.append((String) m1[disfun1].invoke(class1_obj));
 							textArea.append("\nCalculation time: ");
 							textArea.append(String.valueOf(TimeOfOp));
 							textArea.append(String.valueOf(" milliseconds"));

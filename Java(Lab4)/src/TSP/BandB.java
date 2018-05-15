@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 
-public class BruteForce {
+public class BandB {
 
 	private Random r = new Random();
 
@@ -107,37 +107,87 @@ public class BruteForce {
 		return second;
 	}
 
-	public void naive(int vertex) {
+	void TSP1(int graf[][], int end, int weight, int lvl, int path[]) {
 
-		listOfTempVertex[tmpCounter] = vertex;// wierzcholek obecnie "omawiany", dodany do puli
-		tmpCounter++;
-		if (tmpCounter < numberOfCities)// jeslli nie doszlismy jeszcze do ostatniego miasta
+		if (lvl == numberOfCities) // Jeœli wszystkie wierzcholki zostaly juz uzyte
 		{
-			visited[vertex] = true;// oznacz miasto jako odwiedzone
-			for (int i = 0; i < numberOfCities; i++)
-				if (used[vertex][i] == true && !visited[i])// jesli istnieje taka krawedz i wierzcholek docelowy
-															// nie byl jeszcze odwiedzony
-				{
-					tmpSum += getGraf()[vertex][i];// suma tymczasowa zwiekszana jest o te droge
-					naive(i);
-					tmpSum -= getGraf()[vertex][i];
+			// sprawdz, czy z obecnego miasta mozna dostac sie do miasta poczatkowego
+			if (graf[path[lvl - 1]][path[0]] != 0) {
+				// sumaTym zawiera swage obecnej drogi
+				int sumaTym = weight + graf[path[lvl - 1]][path[0]];
+
+				// jesli droga jest krotsza, to zaaktualizuj droge glowna
+				if (sumaTym < sum) {
+					this.copytoFinal(path);
+					sum = sumaTym;
 				}
-			visited[vertex] = false;// wyzerowanie wierzcholkow dla poszukiwania nastepnego
-		} else {
-			if (used[0][vertex])// jesli jest polaczenie
-			{
-				tmpSum += getGraf()[vertex][0];
-				if (tmpSum < sum)// jesli nowa odkryta droga jest mniej kosztowna niz poprzednia
-				{
-					sum = tmpSum;
-					for (int i = 0; i < tmpCounter; i++)
-						vertices[i] = listOfTempVertex[i];// przypisanie nowej drogi
-					setCounter(tmpCounter);
+			}
+
+		}
+
+		for (int i = 0; i < numberOfCities; i++) {
+			// jesli sa jeszcze wierzcholki do odzwiedzenia, to rob to po kolei
+			if (graf[path[lvl - 1]][i] != -1 && visited[i] == false) {
+				int temp = end;
+				weight += graf[path[lvl - 1]][i];
+
+				// liczenie granicy, inny sposob gdy jest wiecej niz 1 wierzcholek w
+				// dotychczas przebytej drodze
+				if (lvl == 1)
+					end -= ((firstMin(graf, path[lvl - 1]) + firstMin(graf, i)) / 2);
+				else
+					end -= ((secondMin(graf, path[lvl - 1]) + firstMin(graf, i)) / 2);
+
+				// granica + waga to wlasciwa dolna granica
+				// jesli dotychczasowa droga jest dluzsza niz najkrotsza do tej
+				// pory znaleziona, to mozna "zaglebiac sie" dalej
+				if (end + weight < sum) {
+					path[lvl] = i;
+					visited[i] = true;
+
+					// rekurencja dla nastepnego poziomu
+					TSP1(graf, end, weight, lvl + 1, path);
 				}
-				tmpSum -= getGraf()[vertex][0];
+
+				// W przeciwnym razie cofamy sie do stanu sprzed najnowszego wierzcholka
+				// i sprawdzamy dalej
+				weight -= graf[path[lvl - 1]][i];
+				end = temp;
+				for (int z = 0; z < visited.length; z++)
+					visited[z] = false;
+				for (int j = 0; j <= lvl - 1; j++)
+					visited[path[j]] = true;
 			}
 		}
-		tmpCounter--;
+	}
+
+	public void TSP(int graf[][]) {
+		int path[] = new int[numberOfCities + 1];
+
+		// Inicjalizacja tablic i zmiennych
+		int end = 0;
+		for (int z = 0; z < path.length; z++) {
+			path[z] = -1;
+			visited[z] = false;
+		}
+
+		// Poczatkowa granica- liczenie jej wyglada nastepujaco: 1/2 * suma
+		// dwoch najkrotszych krawedzi wychodzacych z kazdego wierzcholka
+		for (int i = 0; i < numberOfCities; i++)
+			end += (firstMin(graf, i) + secondMin(graf, i));
+
+		// Zaokraglenie w gore
+		if (end % 2 == 0)
+			end = end / 2;
+		else
+			end = (end + 1) / 2;
+
+		// Pierwszy wierzcholek to wierzcholek 0
+		visited[0] = true;
+		path[0] = 0;
+
+		// Wywolanie funkcji wlasciwej, liczacej TSP
+		TSP1(graf, end, 0, 1, path);
 	}
 
 	public String display() {
