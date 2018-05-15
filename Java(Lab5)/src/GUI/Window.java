@@ -3,6 +3,9 @@ package GUI;
 import java.awt.EventQueue;
 import java.beans.PropertyVetoException;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 import JavaBeen.TeacherJournal;
@@ -15,6 +18,8 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
 
 public class Window {
 
@@ -24,6 +29,11 @@ public class Window {
 	private JFrame beenFrame;
 
 	private final Action action = new SwingAction();
+	private List<TeacherJournal> teacherJournals = new ArrayList<TeacherJournal>();
+	/*
+	 * set x cord's Baund
+	 */
+	private int x = 180;
 
 	/**
 	 * Uruchomia aplikacjê.
@@ -58,70 +68,97 @@ public class Window {
 		beenFrame.setIconImage(
 				Toolkit.getDefaultToolkit().getImage("C:\\Users\\PSzynal\\Documents\\Java\\Java(Lab5)\\img\\pwr.png"));
 
-		beenFrame.setResizable(false);
 		beenFrame.setTitle("Lab 5. Ziarna Java'y.");
-		beenFrame.setBounds(100, 100, 547, 350);
+		beenFrame.setBounds(100, 100, 555, 400);
 		beenFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		TeacherJournal Student_1 = new TeacherJournal();
-		Student_1.setBounds(0, 54, 180, 267);
+		teacherJournals.add(new TeacherJournal());
 
-		TeacherJournal Student_2 = new TeacherJournal();
-		Student_2.setBounds(180, 54, 180, 267);
+		teacherJournals.get(0).setBounds(0, 54, 180, 267);
 
-		TeacherJournal Student_3 = new TeacherJournal();
-		Student_3.setBounds(360, 54, 180, 267);
+		teacherJournals.add(new TeacherJournal());
+		teacherJournals.get(1).setBounds(180, 54, 180, 267);
+
+		teacherJournals.add(new TeacherJournal());
+		teacherJournals.get(2).setBounds(360, 54, 180, 267);
 
 		beenFrame.getContentPane().setLayout(null);
 
-		Student_1.setTest("Test 1");
-		Student_1.setAverage(0);
-		Student_1.setRate(0);
-		beenFrame.getContentPane().add(Student_1);
+		teacherJournals.get(0).setTest("Test 1");
+		teacherJournals.get(0).setAverage(0);
+		teacherJournals.get(0).setRate(0);
+		beenFrame.getContentPane().add(teacherJournals.get(0));
 
-		Student_2.setTest("Test 1");
-		Student_2.setRate(0);
-		Student_2.setAverage(0);
-		beenFrame.getContentPane().add(Student_2);
+		teacherJournals.get(1).setTest("Test 1");
+		teacherJournals.get(1).setRate(0);
+		teacherJournals.get(1).setAverage(0);
+		beenFrame.getContentPane().add(teacherJournals.get(1));
 
-		Student_3.setTest("Test 1");
-		Student_3.setRate(0);
-		Student_3.setAverage(0);
-		beenFrame.getContentPane().add(Student_3);
+		teacherJournals.get(2).setTest("Test 1");
+		teacherJournals.get(2).setRate(0);
+		teacherJournals.get(2).setAverage(0);
+		beenFrame.getContentPane().add(teacherJournals.get(2));
 
 		try {
-			Student_3.setTitle("Student 3");
+			teacherJournals.get(2).setTitle("Student 3");
 
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
 		try {
-			Student_1.setTitle("Student 1");
+			teacherJournals.get(0).setTitle("Student 1");
 
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
 		try {
-			Student_2.setTitle("Student 2");
+			teacherJournals.get(1).setTitle("Student 2");
 
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
 
-		Student_1.addPropertyChangeListener(Student_2);
-		Student_1.addPropertyChangeListener(Student_3);
+		teacherJournals.get(0).addPropertyChangeListener(teacherJournals.get(1));
+		teacherJournals.get(0).addPropertyChangeListener(teacherJournals.get(2));
 
-		Student_2.addPropertyChangeListener(Student_1);
-		Student_2.addPropertyChangeListener(Student_3);
+		teacherJournals.get(1).addPropertyChangeListener(teacherJournals.get(0));
+		teacherJournals.get(1).addPropertyChangeListener(teacherJournals.get(2));
 
-		Student_3.addPropertyChangeListener(Student_1);
-		Student_3.addPropertyChangeListener(Student_2);
+		teacherJournals.get(2).addPropertyChangeListener(teacherJournals.get(0));
+		teacherJournals.get(2).addPropertyChangeListener(teacherJournals.get(1));
 
-		JLabel lblNewLabel = new JLabel("Prace student\u00F3w");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 17));
-		lblNewLabel.setBounds(10, 11, 521, 32);
-		beenFrame.getContentPane().add(lblNewLabel);
+		JLabel lblStudent = new JLabel("Prace student\u00F3w");
+		lblStudent.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStudent.setFont(new Font("Times New Roman", Font.PLAIN, 17));
+		lblStudent.setBounds(10, 11, 521, 32);
+		beenFrame.getContentPane().add(lblStudent);
+
+		JButton btnNewStudent = new JButton("Dodaj nowego studenta");
+		btnNewStudent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				teacherJournals.add(new TeacherJournal());
+				teacherJournals.get(teacherJournals.size() - 1).setBounds(x * (teacherJournals.size() - 1), 54, 180,
+						267);
+
+				teacherJournals.get(teacherJournals.size() - 1).setTest("Test 1");
+				teacherJournals.get(teacherJournals.size() - 1).setAverage(0);
+				teacherJournals.get(teacherJournals.size() - 1).setRate(0);
+				beenFrame.getContentPane().add(teacherJournals.get(teacherJournals.size() - 1));
+
+				try {
+					teacherJournals.get(0).setTitle("Student" + new Integer(teacherJournals.size() - 1).toString());
+				} catch (PropertyVetoException e1) {
+					e1.printStackTrace();
+				}
+
+				beenFrame.setBounds(100, 100, 555 + (x * (teacherJournals.size() - 3)), 400);
+				btnNewStudent.setBounds(10, 329, 521 + (x * (teacherJournals.size() - 3)), 32);
+				lblStudent.setBounds(10, 11, 521 + (x * (teacherJournals.size() - 3)), 32);
+			}
+		});
+		btnNewStudent.setFont(new Font("Times New Roman", Font.BOLD, 15));
+		btnNewStudent.setBounds(10, 329, 521, 32);
+		beenFrame.getContentPane().add(btnNewStudent);
 
 	}
 
